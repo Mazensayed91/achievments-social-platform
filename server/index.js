@@ -4,7 +4,7 @@ import axios from 'axios';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
-import achievementsRoutes from './routes/posts.js'
+import achievementsRoutes from './routes/achievements.js'
 
 // Start up an instance of app
 const PORT = process.env.PORT || 5000 // heroku will initiate PORT env variable later
