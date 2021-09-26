@@ -4,7 +4,7 @@ import {getAchievements, createAchievement} from '../controllers/achievements.js
 const router = express.Router()
 
 router.get('/', getAchievements);
-router.get('/', createAchievement);
+router.post('/', createAchievement);
 
 
 export default router

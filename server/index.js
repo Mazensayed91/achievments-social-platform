@@ -10,9 +10,6 @@ import achievementsRoutes from './routes/achievements.js'
 const PORT = process.env.PORT || 5000 // heroku will initiate PORT env variable later
 const app = express();
 
-// Routes
-app.use('/achievements', achievementsRoutes)
-
 /* Middleware*/
 //Here we are configuring express to use body-parser as middle-ware.
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: false }));
@@ -20,6 +17,9 @@ app.use(bodyParser.json({limit: "30mb", extended: true}));
 
 // Cors for cross origin allowance and security
 app.use(cors());
+
+// Routes
+app.use('/achievements', achievementsRoutes)
 
 // Initialize the main project folder
 app.use(express.static('website'));

@@ -15,15 +15,16 @@ export const getAchievements = async (req, res) => {
 
 
 export const createAchievement = async (req, res) => {
-    const achievement = req.body;
-    const newAchievement = new AchievementMessage(achievement);
+    const { title, message, selectedFile, creator, tags } = req.body;
+    console.log("achievement body", { title, message, selectedFile, creator, tags })
+    const newAchievement = new AchievementMessage({ title, message, selectedFile, creator, tags });
     try{
 
         await newAchievement.save()
         res.status(201).json(newAchievement)
     }
     catch(error){
-        console.log("error", error)
+        console.log("errorrr", error)
         res.status(409).json({message: error.message})
     }
 }
