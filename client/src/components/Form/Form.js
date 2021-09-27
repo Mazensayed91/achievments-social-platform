@@ -3,9 +3,9 @@ import { TextField, Button, Typography, Paper} from "@material-ui/core";
 import useStyles from './styles'
 import FileBase from "react-file-base64"
 import {useDispatch} from "react-redux";
-import {createAchievement} from "../../redux/actions/achievements";
+import {createAchievement, updateAchievement} from "../../redux/actions/achievements";
 
-const Form = () => {
+const Form = ({ currentId, setCurrentId }) => {
     const [achievementData, setAchievementData] = useState({
         creator: '',
         title: '',
@@ -17,8 +17,14 @@ const Form = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(createAchievement(achievementData))
+        if(currentId){
+            dispatch(updateAchievement(currentId, achievementData))
+        }
+        else {
+            dispatch(createAchievement(achievementData))
+        }
     }
+
     const clear = () => {
 
     }

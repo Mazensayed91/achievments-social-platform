@@ -28,3 +28,17 @@ export const createAchievement = (achievement) => async (dispatch) => {
         console.log("error", error)
     }
 }
+
+export const updateAchievement = (id, achievement) => async (dispatch) => {
+    try{
+        const { data }  = await api.updateAchievement(id, achievement);
+        const action = {
+            type: ACHIEVEMENTS_CONSTANTS.UPDATE_ACHIEVEMENT,
+            payload: data
+        }
+        dispatch(action);
+    }
+    catch(error){
+        console.log("error", error)
+    }
+}

@@ -9,6 +9,14 @@ module.exports.achievementsReducer = (achievements = [], action) => {
         case ACHIEVEMENTS_CONSTANTS.CREATE_ACHIEVEMENT:
             return [ ...achievements, action.payload]
 
+        case ACHIEVEMENTS_CONSTANTS.UPDATE_ACHIEVEMENT:
+            return achievements.map((achievement) => {
+                if(achievement._id === action.payload._id){
+                    return action.payload
+                }
+                return achievement
+            })
+
 
         default:
             return achievements

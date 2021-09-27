@@ -1,4 +1,5 @@
 import AchievementMessage from "../models/achievementModel.js";
+import mongoose from "mongoose";
 
 export const getAchievements = async (req, res) => {
     try{
@@ -27,4 +28,15 @@ export const createAchievement = async (req, res) => {
         console.log("errorrr", error)
         res.status(409).json({message: error.message})
     }
+}
+
+export const updateAchievement = async (req, res) => {
+    const { id: _id } = req.params;
+    const achievement = req.body;
+
+    if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send("Not existing id");
+
+    const updatedAchievement = await AchievementMessage.findByIdAndUpdate(_id, achievement, { new: true});
+
+    res.json(updatedAchievement);
 }
