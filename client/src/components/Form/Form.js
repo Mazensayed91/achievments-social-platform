@@ -1,11 +1,12 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { TextField, Button, Typography, Paper} from "@material-ui/core";
 import useStyles from './styles'
 import FileBase from "react-file-base64"
-import {useDispatch} from "react-redux";
-import {createAchievement, updateAchievement} from "../../redux/actions/achievements";
+import {useDispatch, useSelector} from "react-redux";
+import {createAchievement, getAchievements, updateAchievement} from "../../redux/actions/achievements";
 
 const Form = ({ currentId, setCurrentId }) => {
+
     const [achievementData, setAchievementData] = useState({
         creator: '',
         title: '',
@@ -13,29 +14,43 @@ const Form = ({ currentId, setCurrentId }) => {
         tags:'',
         selectedField: ''
     })
+    const achievement = useSelector((state) => currentId ? state.achievements.find((a) => a._id === currentId): null)
     const classes = useStyles();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if(currentId){
             dispatch(updateAchievement(currentId, achievementData))
+            dispatch(getAchievements());
         }
         else {
             dispatch(createAchievement(achievementData))
         }
+        clear()
     }
 
     const clear = () => {
-
+        setCurrentId(null);
+        setAchievementData({
+            creator: '',
+            title: '',
+            message: '',
+            tags:'',
+            selectedField: ''
+        })
     }
 
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        if(achievement) setAchievementData(achievement)
+    }, [achievement])
 
     return (
         <>
             <Paper className={classes.paper}>
                 <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
-                    <Typography variant="h6"> Add another achievement!</Typography>
+                    <Typography variant="h6"> {currentId ? "Edit" : "Add "} Achievement!</Typography>
                     <TextField name="creator" varient="outlined" label="Creator" fullWidth value={achievementData.creator}
                     onChange={(e) => setAchievementData(
                         {

@@ -16,6 +16,8 @@ module.exports.achievementsReducer = (achievements = [], action) => {
                 }
                 return achievement
             })
+        case ACHIEVEMENTS_CONSTANTS.DELETE_ACHIEVEMENT:
+            return achievements.filter(achievement => achievement._id !== action.payload._id)
 
 
         default:

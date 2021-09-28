@@ -5,8 +5,14 @@ import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt"
 import DeleteIcon from "@material-ui/icons/Delete"
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import useStyles from "./styles"
+import {useDispatch, useSelector} from "react-redux";
+import {deleteAchievement} from "../../../redux/actions/achievements";
 
-const Achievement = ({ achievement }) => {
+const Achievement = ({ achievement, setCurrentId, currentId }) => {
+    const dispatch = useDispatch()
+    const deleteAch = () => {
+        dispatch(deleteAchievement(achievement._id))
+    }
     const classes = useStyles()
     return (
         <Card className={classes.card}>
@@ -21,7 +27,7 @@ const Achievement = ({ achievement }) => {
                 </Typography>
             </div>
             <div className={classes.overlay2}>
-                <Button style={{color:'white'}} size="small" onClick={() => {}}>
+                <Button style={{color:'white'}} size="small" onClick={() => {setCurrentId(achievement._id)}}>
                     <MoreHorizIcon fontSize="medium"/>
                 </Button>
             </div>
@@ -39,7 +45,7 @@ const Achievement = ({ achievement }) => {
                     Likes {achievement.likeCount}
 
                 </Button>
-                <Button size="small" color="primary" onClick={() => {}}>
+                <Button size="small" color="primary" onClick={deleteAch}>
                     <DeleteIcon fontSize="small"/>
                     Delete
                 </Button>

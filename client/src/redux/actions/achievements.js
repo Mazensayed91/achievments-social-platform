@@ -42,3 +42,17 @@ export const updateAchievement = (id, achievement) => async (dispatch) => {
         console.log("error", error)
     }
 }
+
+export const deleteAchievement = (id) => async (dispatch) => {
+    try{
+        const { data }  = await api.deleteAchievement(id);
+        const action = {
+            type: ACHIEVEMENTS_CONSTANTS.DELETE_ACHIEVEMENT,
+            payload: data
+        }
+        dispatch(action);
+    }
+    catch(error){
+        console.log("error", error)
+    }
+}
