@@ -50,3 +50,13 @@ export const deleteAchievement = async (req, res) => {
     res.json(deleteAchievement);
 }
 
+export const likeAchievement = async (req, res) => {
+    const { id: _id } = req.params;
+    if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send("Not existing id");
+    const achievement = await AchievementMessage.findById(_id)
+    const updatedAchievement = await AchievementMessage.findByIdAndUpdate(_id,
+        {likeCount: achievement.likeCount + 1},
+        { new: true});
+
+    res.json(updatedAchievement);
+}

@@ -56,3 +56,17 @@ export const deleteAchievement = (id) => async (dispatch) => {
         console.log("error", error)
     }
 }
+
+export const likeAchievement = (id) => async (dispatch) => {
+    try{
+        const { data }  = await api.likeAchievement(id);
+        const action = {
+            type: ACHIEVEMENTS_CONSTANTS.LIKE_ACHIEVEMENT,
+            payload: data
+        }
+        dispatch(action);
+    }
+    catch(error){
+        console.log("error", error)
+    }
+}

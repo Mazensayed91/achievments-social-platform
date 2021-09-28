@@ -10,6 +10,7 @@ module.exports.achievementsReducer = (achievements = [], action) => {
             return [ ...achievements, action.payload]
 
         case ACHIEVEMENTS_CONSTANTS.UPDATE_ACHIEVEMENT:
+        case ACHIEVEMENTS_CONSTANTS.LIKE_ACHIEVEMENT:
             return achievements.map((achievement) => {
                 if(achievement._id === action.payload._id){
                     return action.payload
