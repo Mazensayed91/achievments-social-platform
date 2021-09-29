@@ -8,7 +8,7 @@ import useStyles from "./styles"
 import {useDispatch} from "react-redux";
 import {deleteAchievement, likeAchievement} from "../../../redux/actions/achievements";
 
-const Achievement = ({ achievement, setCurrentId, currentId }) => {
+const Achievement = ({ achievement, setCurrentId }) => {
     const dispatch = useDispatch()
     const deleteAch = () => {
         dispatch(deleteAchievement(achievement._id))
