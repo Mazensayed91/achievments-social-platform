@@ -5,6 +5,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import achievementsRoutes from './routes/achievements.js'
+import userRoutes from './routes/user.js'
 
 // Start up an instance of app
 const PORT = process.env.PORT || 5000 // heroku will initiate PORT env variable later
@@ -21,6 +22,7 @@ app.use(cors());
 
 // Routes
 app.use('/achievements', achievementsRoutes)
+app.use('/user', userRoutes)
 
 // Initialize the main project folder
 app.use(express.static('website'));

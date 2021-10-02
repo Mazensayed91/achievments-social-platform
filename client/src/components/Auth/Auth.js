@@ -6,7 +6,7 @@ import Input from "./Input"
 import Icon from "./icon"
 import useStyles from './styles'
 import {useDispatch} from "react-redux";
-import {googleAuth} from "../../redux/actions/auth";
+import {googleAuth, signUp, signIn} from "../../redux/actions/auth";
 import { useHistory } from "react-router-dom"
 
 
@@ -15,13 +15,29 @@ const Auth = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const classes = useStyles();
+    const initialFormData = {
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        confirmPassword: ""
+    }
     const [isSignup, setIsSignUp] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
-    const handleSubmit = () => {
+    const [formData, setFormData] = useState(initialFormData);
 
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log("formData", formData);
+        if(isSignup){
+            dispatch(signUp(formData, history))
+        }
+        else{
+            dispatch(signIn(formData, history))
+        }
     }
-    const handleChange = () => {
-
+    const handleChange = (e) => {
+        setFormData({...formData, [e.target.name]: e.target.value})
     }
 
     const handleShowPassword = () => {

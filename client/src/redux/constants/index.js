@@ -8,5 +8,7 @@ module.exports.ACHIEVEMENTS_CONSTANTS = {
 
 module.exports.AUTH_CONSTANTS = {
     AUTH: "AUTH",
-    LOGOUT: "LOGOUT"
+    LOGOUT: "LOGOUT",
+    SIGNUP: "SIGNUP",
+    SIGNIN: "SIGNIN"
 }
