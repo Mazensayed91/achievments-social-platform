@@ -1,5 +1,5 @@
 import {AUTH_CONSTANTS} from "../constants";
-
+import * as api from "../../api/index"
 
 export const googleAuth = (result, token) => async (dispatch) => {
     try{
@@ -36,10 +36,10 @@ export const logout = () => async (dispatch) => {
 export const signUp = (formData, history) => async (dispatch) => {
     try{
 
-        // api call
+        const {data} = await api.signUp(formData)
         const action = {
-            type: AUTH_CONSTANTS.SIGNUP,
-            payload: formData
+            type: AUTH_CONSTANTS.AUTH,
+            payload: data
         }
         dispatch(action)
         history.push("/")
@@ -51,10 +51,11 @@ export const signUp = (formData, history) => async (dispatch) => {
 
 export const signIn = (formData, history) => async (dispatch) => {
     try{
-        // api call
+
+        const {data} = await api.signIn(formData)
         const action = {
-            type: AUTH_CONSTANTS.SIGNIN,
-            payload: formData
+            type: AUTH_CONSTANTS.AUTH,
+            payload: data
         }
         dispatch(action)
         history.push("/")

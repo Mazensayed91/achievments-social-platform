@@ -54,8 +54,18 @@ export const likeAchievement = async (req, res) => {
     const { id: _id } = req.params;
     if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send("Not existing id");
     const achievement = await AchievementMessage.findById(_id)
+
+    const likeIndex = achievement.likes.findIndex((id) => id === String(req.userId))
+
+    if(likeIndex === -1){
+        achievement.likes.push(req.userId)
+    }
+    else{
+        achievement.likes.filter((id) => id !== String(req.userId))
+    }
+
     const updatedAchievement = await AchievementMessage.findByIdAndUpdate(_id,
-        {likeCount: achievement.likeCount + 1},
+        achievement,
         { new: true});
 
     res.json(updatedAchievement);

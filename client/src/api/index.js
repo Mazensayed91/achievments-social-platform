@@ -1,9 +1,12 @@
 import axios from 'axios'
 
-const url = "http://localhost:5000/achievements"
+const API = axios.create({ baseURL: "http://localhost:5000" })
 
-export const fetchAchievements = () => axios.get(url);
-export const createAchievement = (newAchievement) => axios.post(url, newAchievement);
-export const updateAchievement = (id, updatedAchievement) => axios.patch(`${url}/${id}`, updatedAchievement);
-export const deleteAchievement = (id) => axios.delete(`${url}/${id}`);
-export const likeAchievement = (id) => axios.patch(`${url}/${id}/likeAchievement`);
+export const fetchAchievements = () => API.get('/achievements');
+export const createAchievement = (newAchievement) => API.post('/achievements', newAchievement);
+export const updateAchievement = (id, updatedAchievement) => API.patch(`/achievements/${id}`, updatedAchievement);
+export const deleteAchievement = (id) => API.delete(`/achievements/${id}`);
+export const likeAchievement = (id) => API.patch(`/achievements/${id}/likeAchievement`);
+
+export const signIn = (formData) => API.post('/user/signin', formData);
+export const signUp = (formData) => API.post('/user/signup', formData);

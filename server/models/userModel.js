@@ -8,6 +8,6 @@ const userSchema = mongoose.Schema({
 
 })
 
-const User = mongoose.model('AchievementMessage', userSchema)
+const User = mongoose.model('User', userSchema)
 
 export default User;
