@@ -61,7 +61,7 @@ export const likeAchievement = async (req, res) => {
         achievement.likes.push(req.userId)
     }
     else{
-        achievement.likes.filter((id) => id !== String(req.userId))
+        achievement.likes = achievement.likes.filter((id) => id !== String(req.userId))
     }
 
     const updatedAchievement = await AchievementMessage.findByIdAndUpdate(_id,
