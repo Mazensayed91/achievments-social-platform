@@ -17,7 +17,7 @@ export const getAchievements = () => async (dispatch) => {
 
 export const createAchievement = (achievement) => async (dispatch) => {
     try{
-        const data  = await api.createAchievement(achievement);
+        const { data }  = await api.createAchievement(achievement);
         const action = {
             type: ACHIEVEMENTS_CONSTANTS.CREATE_ACHIEVEMENT,
             payload: data
@@ -59,7 +59,9 @@ export const deleteAchievement = (id) => async (dispatch) => {
 
 export const likeAchievement = (id) => async (dispatch) => {
     try{
+        console.log("likkee id", id)
         const { data }  = await api.likeAchievement(id);
+
         const action = {
             type: ACHIEVEMENTS_CONSTANTS.LIKE_ACHIEVEMENT,
             payload: data

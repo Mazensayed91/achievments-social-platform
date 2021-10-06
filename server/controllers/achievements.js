@@ -16,9 +16,9 @@ export const getAchievements = async (req, res) => {
 
 
 export const createAchievement = async (req, res) => {
-    const { title, message, selectedFile, creator, tags } = req.body;
-    console.log("achievement body", { title, message, selectedFile, creator, tags })
-    const newAchievement = new AchievementMessage({ title, message, selectedFile, creator, tags });
+    const achievement = req.body;
+    console.log("achievement body", achievement)
+    const newAchievement = new AchievementMessage({ ...achievement, creator: req.userId, createdAt: new Date().toISOString()});
     try{
 
         await newAchievement.save()

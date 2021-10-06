@@ -14,16 +14,17 @@ const Achievement = ({ achievement, setCurrentId }) => {
         dispatch(deleteAchievement(achievement._id))
     }
     const like = () => {
+        console.log("likee", achievement._id)
         dispatch(likeAchievement(achievement._id))
     }
     const classes = useStyles()
     return (
         <Card className={classes.card}>
-            {console.log("achie", achievement)}
+            {console.log("achievv", achievement)}
             <CardMedia className={classes.media} image={achievement.selectedFile} title={achievement.title}/>
             <div className={classes.overlay}>
                 <Typography varient="h6">
-                    {achievement.creator}
+                    {achievement.name}
                 </Typography>
                 <Typography varient="h6">
                     {moment(achievement.createdAt).fromNow()}
@@ -35,7 +36,7 @@ const Achievement = ({ achievement, setCurrentId }) => {
                 </Button>
             </div>
             <div>
-                <Typography varient="body2" color="textSecondary">{achievement.tags.map((tag) => `#${tag} `)}</Typography>
+                <Typography varient="body2" color="textSecondary">{achievement.tags ? achievement?.tags.map((tag) => `#${tag}`) : ""}</Typography>
             </div>
             <CardContent>
                 <Typography className={classes.title} variant="h5">
@@ -45,7 +46,7 @@ const Achievement = ({ achievement, setCurrentId }) => {
             <CardActions>
                 <Button size="small" color="primary" onClick={like}>
                     <ThumbUpAltIcon fontSize="small"/>
-                    Likes {achievement.likeCount}
+                    Likes 3
 
                 </Button>
                 <Button size="small" color="primary" onClick={deleteAch}>

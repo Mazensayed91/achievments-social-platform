@@ -8,31 +8,35 @@ import {createAchievement, getAchievements, updateAchievement} from "../../redux
 const Form = ({ currentId, setCurrentId }) => {
 
     const [achievementData, setAchievementData] = useState({
-        creator: '',
         title: '',
         message: '',
         tags:'',
         selectedField: ''
     })
     const achievement = useSelector((state) => currentId ? state.achievements.find((a) => a._id === currentId): null)
+    const dispatch = useDispatch()
     const classes = useStyles();
+
+    useEffect(() => {
+        if(achievement) setAchievementData(achievement)
+    }, [achievement])
+    const user = JSON.parse(localStorage.getItem('profile'))
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if(currentId){
-            dispatch(updateAchievement(currentId, achievementData))
+            dispatch(updateAchievement(currentId, { ...achievementData, name: user?.result?.name }))
             dispatch(getAchievements());
         }
         else {
-            dispatch(createAchievement(achievementData))
+            dispatch(createAchievement({ ...achievementData, name: user?.result?.name }))
         }
         clear()
     }
 
     const clear = () => {
-        setCurrentId(null);
+        setCurrentId(0);
         setAchievementData({
-            creator: '',
             title: '',
             message: '',
             tags:'',
@@ -40,24 +44,22 @@ const Form = ({ currentId, setCurrentId }) => {
         })
     }
 
-    const dispatch = useDispatch()
 
-    useEffect(() => {
-        if(achievement) setAchievementData(achievement)
-    }, [achievement])
+    if(! user?.result?.name){
+        return(
+            <Paper className={classes.paper}>
+                <Typography variant="h6" align="center">
+                    Please Sign In to create your achievements and interact with others!
+                </Typography>
+            </Paper>
+        )
+    }
 
     return (
         <>
             <Paper className={classes.paper}>
                 <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
                     <Typography variant="h6"> {currentId ? "Edit" : "Add "} Achievement!</Typography>
-                    <TextField name="creator" varient="outlined" label="Creator" fullWidth value={achievementData.creator}
-                    onChange={(e) => setAchievementData(
-                        {
-                                ...achievementData,
-                                creator: e.target.value
-                            })}
-                    />
                     <TextField name="title" varient="outlined" label="Title" fullWidth value={achievementData.title}
                                onChange={(e) => setAchievementData(
                                    {
