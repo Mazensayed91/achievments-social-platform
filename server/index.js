@@ -24,6 +24,10 @@ app.use(cors());
 app.use('/achievements', achievementsRoutes)
 app.use('/user', userRoutes)
 
+app.get("/", (req, res) => {
+    res.send("Hello to achievements api")
+})
+
 // Initialize the main project folder
 app.use(express.static('website'));
 
