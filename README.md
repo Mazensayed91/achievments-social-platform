@@ -67,11 +67,6 @@
     │   ├── Achievements.js # Represents a All the achievements.
     │       ├── achievementModel.js # Represents the achievement schema.
     │       ├── userModel.js # Represents the user schema.
-    │   └── Auth.js # Represents auth view [signin-signup]
-    │   └── Form.js # Represents form to add achievment
-    │   └── Navbar.js # Represents the navbar of the entire app
-    │   └── Home.js # Represents the grid listing the achievments
-    │       ├── Input.js # Represents one input field.
     ├── routes # contains all express routes.
     │   ├── achievements.js # contains all the routes for the achievments app
     │   ├── user.js # contains all the routes for the user app
